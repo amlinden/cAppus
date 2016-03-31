@@ -152,11 +152,13 @@
     <div id="map"></div>
     <script>
       var map;
+      
       //We define a JavasScript function that creates a map in the div
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 59.351128, lng: 18.070850},
-          zoom: 14
+          zoom: 14,
+          mapTypeId: google.maps.MapTypeId.HYBRID
         });
       }
     </script>
