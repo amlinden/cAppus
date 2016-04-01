@@ -149,7 +149,8 @@
 
   <body>
     <body>
-    <div id="map"></div>
+    <div id="map">
+    </div>
     <script>
       var map;
       
@@ -158,16 +159,36 @@
         map = new google.maps.Map(document.getElementById('map'), {
 
           center: {lat: 59.351128, lng: 18.070850},
-          disableDefaultUI:true,
-          zoom: 14,
-          mapTypeId: google.maps.MapTypeId.HYBRID
-
+          disableDefaultUI: true,
+          zoom: 15,
+          draggable: false,
+          mapTypeId: google.maps.MapTypeId.HYBRID,  
+          origin/master
         });
+        map.setTilt(45);
+        // Create the DIVs to hold the pan control and call the panControl()
+        // constructor passing in these DIVs.
+        var panningControlDiv1 = document.createElement('div');
+        var panningControlDiv2 = document.createElement('div');
+        var panningControlDiv3 = document.createElement('div');
+        var panningControlDiv4 = document.createElement('div');
+        var panningControl = new PanningControl(panningControlDiv1, panningControlDiv2, panningControlDiv3 , panningControlDiv4, map);
+
+        panningControlDiv1.index = 1;
+        panningControlDiv2.index = 1;
+        panningControlDiv3.index = 1;
+        panningControlDiv4.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv1);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv2);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv3);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv4);
+          
       }
 
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbYJfFfAEX31FqfY9CTLiEc-0-VYmVyVk&callback=initMap"
     async defer></script>
+    <script src="js/panControl.js"></script>
   </body>
 </html>
