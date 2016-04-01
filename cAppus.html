@@ -144,22 +144,26 @@
       html {
         -webkit-text-size-adjust: 100%;
       }
+      #wrapper{
+        border-radius:10px;
+      }
     </style>
   </head>
 
   <body>
     <body>
+
     <div id="map">
     </div>
+
+
     <script>
       var map;
       
       //We define a JavasScript function that creates a map in the div
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-
           center: {lat: 59.351128, lng: 18.070850},
-
           disableDefaultUI: true,
           zoom: 15,
           draggable: false,
@@ -169,21 +173,19 @@
 
         // Create the DIVs to hold the pan control and call the panControl()
         // constructor passing in these DIVs.
-        var panningControlDiv1 = document.createElement('div');
-        var panningControlDiv2 = document.createElement('div');
-        var panningControlDiv3 = document.createElement('div');
-        var panningControlDiv4 = document.createElement('div');
-        var panningControl = new PanningControl(panningControlDiv1, panningControlDiv2, panningControlDiv3 , panningControlDiv4, map);
+        var panningControlDiv = document.createElement('div');
+        var panningControl = new PanningControl(panningControlDiv, map);
+        panningControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv);
+       
 
-        panningControlDiv1.index = 1;
-        panningControlDiv2.index = 1;
-        panningControlDiv3.index = 1;
-        panningControlDiv4.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv1);
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv2);
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv3);
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv4);
-          
+
+        var zoomControlDiv = document.createElement('div');
+        var zoomControl = new ZoomControl(zoomControlDiv, map);
+        zoomControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(zoomControlDiv);
+       
+        
       }
 
 
@@ -191,5 +193,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbYJfFfAEX31FqfY9CTLiEc-0-VYmVyVk&callback=initMap"
     async defer></script>
     <script src="js/panControl.js"></script>
+    <script src="js/zoomControl.js"></script>
   </body>
 </html>
