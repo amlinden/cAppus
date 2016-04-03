@@ -10,7 +10,7 @@ function PanningControl(controlDiv, map) {
           controlWrapper.style.cursor = 'pointer';
           controlWrapper.style.textAlign = 'center';
           controlWrapper.style.width = '32px'; 
-          controlWrapper.style.height = '40px';
+          controlWrapper.style.height = '45px';
           controlDiv.appendChild(controlWrapper);
 
         var controlWrapper1 = document.createElement('div');
@@ -22,7 +22,7 @@ function PanningControl(controlDiv, map) {
           controlWrapper1.style.cursor = 'pointer';
           controlWrapper1.style.textAlign = 'center';
           controlWrapper.style.width = '32px'; 
-          controlWrapper.style.height = '40px';
+          controlWrapper.style.height = '45px';
           controlDiv.appendChild(controlWrapper1);
      
 
@@ -42,7 +42,7 @@ function PanningControl(controlDiv, map) {
         controlTextLeft.style.color = 'rgb(25,25,25)';
         controlTextLeft.style.fontFamily = 'Roboto,Arial,sans-serif';
         controlTextLeft.style.fontSize = '20px';
-        controlTextLeft.style.paddingLeft = '0px';
+        controlTextLeft.style.paddingLeft = '5px';
         controlTextLeft.style.paddingRight = '5px';
         controlTextLeft.innerHTML = '<';
         controlWrapper1.appendChild(controlTextLeft);     
@@ -53,7 +53,7 @@ function PanningControl(controlDiv, map) {
         controlTextRight.style.fontFamily = 'Roboto,Arial,sans-serif';
         controlTextRight.style.fontSize = '20px';
         controlTextRight.style.paddingLeft = '5px';
-        controlTextRight.style.paddingRight = '0px';
+        controlTextRight.style.paddingRight = '5px';
         controlTextRight.innerHTML = '>';
         controlWrapper1.appendChild(controlTextRight);  
 

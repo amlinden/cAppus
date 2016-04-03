@@ -12,7 +12,7 @@ function ZoomControl (controlDiv, map){
   controlWrapper.style.cursor = 'pointer';
   controlWrapper.style.textAlign = 'center';
   controlWrapper.style.width = '32px'; 
-  controlWrapper.style.height = '64px';
+  controlWrapper.style.height = '60px';
   controlDiv.appendChild(controlWrapper);
 
   var zoomInButton = document.createElement('div');
