@@ -176,14 +176,14 @@
         var panningControlDiv = document.createElement('div');
         var panningControl = new PanningControl(panningControlDiv, map);
         panningControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv);
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(panningControlDiv);
        
 
 
         var zoomControlDiv = document.createElement('div');
         var zoomControl = new ZoomControl(zoomControlDiv, map);
         zoomControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(zoomControlDiv);
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(zoomControlDiv);
        
         
       }
