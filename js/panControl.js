@@ -10,7 +10,7 @@ function PanningControl(controlDiv, map) {
           controlWrapper.style.cursor = 'pointer';
           controlWrapper.style.textAlign = 'center';
           controlWrapper.style.width = '32px'; 
-  controlWrapper.style.height = '40px';
+          controlWrapper.style.height = '40px';
           controlDiv.appendChild(controlWrapper);
 
         var controlWrapper1 = document.createElement('div');
@@ -22,7 +22,7 @@ function PanningControl(controlDiv, map) {
           controlWrapper1.style.cursor = 'pointer';
           controlWrapper1.style.textAlign = 'center';
           controlWrapper.style.width = '32px'; 
-  controlWrapper.style.height = '64px';
+          controlWrapper.style.height = '64px';
           controlDiv.appendChild(controlWrapper1);
      
 
@@ -83,33 +83,28 @@ function PanningControl(controlDiv, map) {
 
         // Setup the click event listeners: pan up.
         controlTextUp.addEventListener('click', function() {
-         var center = map.getCenter(); 
-         var New_center = new google.maps.LatLng(center.lat() + 0.01, center.lng()); 
-         map.setCenter(New_center);
-         });
+        var center = map.getCenter(); 
+        var New_center = new google.maps.LatLng(center.lat() + 0.008, center.lng()); 
+        map.setCenter(New_center);
+        });
         // Setup the click event listeners: pan down.
         controlTextDown.addEventListener('click', function() {
-         
-
-         var center = map.getCenter(); 
-         var New_center = new google.maps.LatLng(center.lat() - 0.01, center.lng()); 
-         map.setCenter(New_center);
-         });
+        var center = map.getCenter(); 
+        var New_center = new google.maps.LatLng(center.lat() - 0.008, center.lng()); 
+        map.setCenter(New_center);
+        });
         // Setup the click event listeners: pan left.
         controlTextLeft.addEventListener('click', function() {
-
-            var center = map.getCenter(); 
-         var New_center = new google.maps.LatLng(center.lat(), center.lng() - 0.01); 
-         map.setCenter(New_center);
-
-         
+        var center = map.getCenter(); 
+        var New_center = new google.maps.LatLng(center.lat(), center.lng() - 0.01); 
+        map.setCenter(New_center);
          });
         // Setup the click event listeners: pan right.
         controlTextRight.addEventListener('click', function() {
-         var center = map.getCenter(); 
-         var New_center = new google.maps.LatLng(center.lat(), center.lng() + 0.01); 
-         map.setCenter(New_center);
-         });
+        var center = map.getCenter(); 
+        var New_center = new google.maps.LatLng(center.lat(), center.lng() + 0.01); 
+        map.setCenter(New_center);
+        });
 
       }
 
