@@ -198,6 +198,12 @@
         fullScreenDiv.index = 1;
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(fullScreenDiv);
 */
+        /* My current location div*/
+        var myLocationDiv = document.createElement('div');
+        var myLocation = new MyLocation(myLocationDiv, map);
+        myLocationDiv.index = 1;
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(myLocationDiv);
+
         //Set marker on my favourite location
         var marker = new google.maps.Marker({
         position: mariaLocation,
@@ -258,7 +264,9 @@
     async defer></script>
     <script src="js/panControl.js"></script>
     <script src="js/zoomControl.js"></script>
-    <script src="js/fullScreen.js"></script>
+    <script src="js/myLocation.js"></script>
+    <!-- <script src="js/fullScreen.js"></script> -->
+    
    
   </body>
 </html>

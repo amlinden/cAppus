@@ -34,7 +34,7 @@ function PanningControl(controlDiv, map) {
         controlTextUp.style.paddingLeft = '5px';
         controlTextUp.style.paddingRight = '5px';
         controlTextUp.style.marginBottom = '5px';
-        controlTextUp.innerHTML = 'Λ';
+        controlTextUp.innerHTML = '&#923';
         controlWrapper.appendChild(controlTextUp);        
 
         // Set CSS for the LEFT control interior.
