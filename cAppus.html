@@ -214,13 +214,13 @@
 
 
          //Set marker on my favourite location
-        var marker = new google.maps.Marker({
+        var marker2 = new google.maps.Marker({
         position: amandaLocation,
         map: map,
         title: 'My favorite café at KTH'
         });
         //Info Window
-        var contentString = '<div id="content">'+
+        var contentString2 = '<div id="content">'+
         '<div id="siteNotice">'+
         '</div>'+
         '<h1 id="firstHeading" class="firstHeading">Open Lab Café</h1>'+
@@ -229,11 +229,11 @@
         '</div>'+
         '</div>';
 
-         var infowindow = new google.maps.InfoWindow({
-             content: contentString
+         var infowindow2 = new google.maps.InfoWindow({
+             content: contentString2
          });
-         marker.addListener('click', function() {
-              infowindow.open(map, marker);
+         marker2.addListener('click', function() {
+              infowindow2.open(map, marker2);
         });
 
     }
