@@ -160,6 +160,8 @@
     <script>
       var map;
       var mariaLocation = {lat: 59.36591, lng:  18.07615};
+      var amandaLocation = {lat: 59.346393, lng:  18.072504};
+
       
       //We define a JavasScript function that creates a map in the div
       function initMap() {
@@ -199,6 +201,31 @@
         '<p><b>Norra djurgarden</b>, is a large park in the region of  Östermalm in Stockholm.' +
         'Also, it is part of the Royal Djurgården. '+
         'A nice place to visit especially during the spring and the summer that you can enjoy the sun and the nature. People go there to run, play, ride horses or just relax by the lakes and forest.'+
+        '</div>'+
+        '</div>';
+
+         var infowindow = new google.maps.InfoWindow({
+             content: contentString
+         });
+         marker.addListener('click', function() {
+              infowindow.open(map, marker);
+        });
+
+
+
+         //Set marker on my favourite location
+        var marker = new google.maps.Marker({
+        position: amandaLocation,
+        map: map,
+        title: 'My favorite café at KTH'
+        });
+        //Info Window
+        var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">Open Lab Café</h1>'+
+        '<div id="bodyContent">'+
+        '<p><b>Open Lab Café</b>, is a coffe place for students and professors at KTH.' +
         '</div>'+
         '</div>';
 
