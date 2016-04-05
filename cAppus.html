@@ -159,7 +159,6 @@
 
     <script>
       var map;
-      var mariaLocation = {lat: 59.36591, lng:  18.07615};
       
       //We define a JavasScript function that creates a map in the div
       function initMap() {
@@ -172,46 +171,22 @@
         });
         map.setTilt(45);
 
-        // Create the DIVs to hold the pan and zoom control and call the panControl()
-        // and zoomControl constructors passing in these DIVs.
+        // Create the DIVs to hold the pan control and call the panControl()
+        // constructor passing in these DIVs.
         var panningControlDiv = document.createElement('div');
         var panningControl = new PanningControl(panningControlDiv, map);
         panningControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(panningControlDiv);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(panningControlDiv);
+       
+
 
         var zoomControlDiv = document.createElement('div');
         var zoomControl = new ZoomControl(zoomControlDiv, map);
         zoomControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(zoomControlDiv);  
-
-        //Set marker on my favourite location
-        var marker = new google.maps.Marker({
-        position: mariaLocation,
-        map: map,
-        title: 'My favorite park to relax'
-        });
-        //Info Window
-        var contentString = '<div id="content">'+
-        '<div id="siteNotice">'+
-        '</div>'+
-        '<h1 id="firstHeading" class="firstHeading">Norra djurgarden</h1>'+
-        '<div id="bodyContent">'+
-        '<p><b>Norra djurgarden</b>, is a large park in the region of  Östermalm in Stockholm.' +
-        'Also, it is part of the Royal Djurgården. '+
-        'A nice place to visit especially during the spring and the summer that you can enjoy the sun and the nature. People go there to run, play, ride horses or just relax by the lakes and forest.'+
-        '</div>'+
-        '</div>';
-
-         var infowindow = new google.maps.InfoWindow({
-             content: contentString
-         });
-         marker.addListener('click', function() {
-              infowindow.open(map, marker);
-        });
-
-    }
-
-
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(zoomControlDiv);
+       
+        
+      }
 
 
     </script>
