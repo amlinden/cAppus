@@ -131,6 +131,8 @@
           rel="apple-touch-startup-image">
 
     <meta name="viewport" content="initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta charset="utf-8">
     <style>
       html, body {
@@ -155,7 +157,12 @@
 
     <div id="map">
     </div>
-
+    
+    <!-- Hide address bar -->
+    <script type="text/javascript">
+      window.addEventListener("load", function() { window.scrollTo(0, 1); });
+      window.scrollTo(0,1);
+    </script>
 
     <script>
       var map;
@@ -186,6 +193,11 @@
         zoomControlDiv.index = 1;
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(zoomControlDiv);  
 
+        /*var fullScreenDiv = document.createElement('div');
+        var fullScreen = new FullScreen(fullScreenDiv, map);
+        fullScreenDiv.index = 1;
+        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(fullScreenDiv);
+*/
         //Set marker on my favourite location
         var marker = new google.maps.Marker({
         position: mariaLocation,
@@ -246,5 +258,7 @@
     async defer></script>
     <script src="js/panControl.js"></script>
     <script src="js/zoomControl.js"></script>
+    <script src="js/fullScreen.js"></script>
+   
   </body>
 </html>
