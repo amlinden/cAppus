@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>iOS 8 web app</title>
+    <title>cAppus</title>
 
     <!-- CONFIGURATION -->
 
-    <!-- Allow web app to be run in full-screen mode. -->
+    
     <meta name="apple-mobile-web-app-capable"
           content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
 
     <!-- Make the app title different than the page title. -->
     <meta name="apple-mobile-web-app-title"
-          content="iOS 8 web app">
+          content="cAppus">
 
     <!-- Configure the status bar. -->
     <meta name="apple-mobile-web-app-status-bar-style"
@@ -25,42 +27,33 @@
     <meta name="format-detection"
           content="telephone=no">
 
-    <!-- ICONS -->
 
+
+    <!-- ICONS FOR IPHONE-->
     <!-- iPad retina icon -->
-    <link href="https://placehold.it/152"
-          sizes="152x152"
-          rel="apple-touch-icon-precomposed">
+    <link href="http://s21.postimg.org/l6w74g4pv/152x152.png" sizes="152x152" rel="apple-touch-icon-precomposed">
 
     <!-- iPad retina icon (iOS < 7) -->
-    <link href="https://placehold.it/144"
-          sizes="144x144"
-          rel="apple-touch-icon-precomposed">
+    <link href="http://s21.postimg.org/arv2sndur/144x144.png" sizes="144x144" rel="apple-touch-icon-precomposed">
 
     <!-- iPad non-retina icon -->
-    <link href="https://placehold.it/76"
-          sizes="76x76"
-          rel="apple-touch-icon-precomposed">
+    <link href="http://s23.postimg.org/4357in5fb/76x76.png" sizes="76x76" rel="apple-touch-icon-precomposed">
 
     <!-- iPad non-retina icon (iOS < 7) -->
-    <link href="https://placehold.it/72"
-          sizes="72x72"
-          rel="apple-touch-icon-precomposed">
+    <link href="http://s9.postimg.org/jh1vu3s7f/72x72.png" sizes="72x72" rel="apple-touch-icon-precomposed">
 
     <!-- iPhone 6 Plus icon -->
-    <link href="https://placehold.it/180"
-          sizes="120x120"
-          rel="apple-touch-icon-precomposed">
+    <link href="http://s9.postimg.org/jdzmoav0r/180x180.png" sizes="180x180" rel="apple-touch-icon-precomposed">
 
     <!-- iPhone retina icon (iOS < 7) -->
-    <link href="https://placehold.it/114"
-          sizes="114x114"
-          rel="apple-touch-icon-precomposed">
-
+   <link href="http://s28.postimg.org/pjfmiu1u1/114x114.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+    
     <!-- iPhone non-retina icon (iOS < 7) -->
-    <link href="https://placehold.it/57"
-          sizes="57x57"
-          rel="apple-touch-icon-precomposed">
+    <link href="http://s22.postimg.org/b8hun6ex9/57x57.png" sizes="57x57" rel="apple-touch-icon-precomposed">
+
+    <!-- ICONS FOR ANDROID -->
+    <link rel="icon" sizes="192x192" href="http://s28.postimg.org/e07vhqoct/192x192.png">
+
 
     <!-- STARTUP IMAGES -->
 
@@ -131,9 +124,8 @@
           rel="apple-touch-startup-image">
 
     <meta name="viewport" content="initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <style>
       html, body {
         height: 100%;
@@ -149,12 +141,36 @@
       #wrapper{
         border-radius:10px;
       }
+      .floating-panel-up {
+        position: absolute;
+        bottom: 45px;
+        right: 5px;
+        z-index: 5;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+      }
+      .floating-panel-down {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        z-index: 5;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+      }
     </style>
   </head>
 
   <body>
     <body>
-
+    <div class="floating-panel-up">
+    <input onclick="deleteMarkers();" type=button value="Delete Markers" class="btn btn-danger">
+    </div>
+    <div class="floating-panel-down">
+      <input onclick="secretLocation();" type=button value="Hidden Gem" class="btn btn-primary">
+      <input onclick="kth();" type=button value="KTH" class="btn btn-primary">
+    </div>
     <div id="map">
     </div>
     
@@ -166,6 +182,7 @@
 
     <script>
       var map;
+      //var markers = [];
       var mariaLocation = {lat: 59.36591, lng:  18.07615};
       var amandaLocation = {lat: 59.346393, lng:  18.072504};
 
@@ -173,13 +190,19 @@
       //We define a JavasScript function that creates a map in the div
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 59.351128, lng: 18.070850}, //äKTH
+          center: {lat: 59.34753, lng: 18.07385}, 
           disableDefaultUI: true,
           zoom: 15,
           draggable: false,
-          mapTypeId: google.maps.MapTypeId.HYBRID,  
+          disableDoubleClickZoom: true,
+          mapTypeId: google.maps.MapTypeId.HYBRID, 
         });
         map.setTilt(45);
+
+        // This event listener will call addMarker() when the map is clicked.
+        map.addListener('dblclick', function(event) {
+          addMarker(event.latLng);
+        });
 
         // Create the DIVs to hold the pan and zoom control and call the panControl()
         // and zoomControl constructors passing in these DIVs.
@@ -193,11 +216,6 @@
         zoomControlDiv.index = 1;
         map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(zoomControlDiv);  
 
-        /*var fullScreenDiv = document.createElement('div');
-        var fullScreen = new FullScreen(fullScreenDiv, map);
-        fullScreenDiv.index = 1;
-        map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(fullScreenDiv);
-*/
         /* My current location div*/
         var myLocationDiv = document.createElement('div');
         var myLocation = new MyLocation(myLocationDiv, map);
@@ -254,8 +272,95 @@
               infowindow2.open(map, marker2);
         });
 
-    }
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].addListener('click', function() {
+                  infowindow2.open(map, marker2);
+            });
+        }
 
+
+    }
+    // Adds a marker to the map and push to the array.
+    
+    var markers = [];
+    function addMarker(location) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        draggable:true,
+        animation: google.maps.Animation.DROP
+      });
+      markers.push(marker);
+      var newcontentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">New marker</h3>'+
+        '<div id="bodyContent">'+
+        '<p><b>Description</b>' +
+        '</div>'+
+        '</div>';
+      marker.addListener('click', function() {
+
+              var newinfowindow = new google.maps.InfoWindow({
+                   content: newcontentString
+               });
+              newinfowindow.open(map, marker);
+      });
+
+    }
+    
+    //Delete markers
+    function deleteMarkers() {
+     for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+      }
+      markers = [];
+    }
+    //Secret Location
+    function secretLocation() {
+            var secretlat = 39.37521
+            var secretlng = 23.20289
+           
+            var mySecretLocation = {lat: secretlat, lng:  secretlng};
+            map.panTo(mySecretLocation);
+            map.setZoom(15);
+
+            var icon = {
+                url: "http://s24.postimg.org/417vwg3bp/umbrella2.png", // url
+                scaledSize: new google.maps.Size(50, 50), // scaled size
+                origin: new google.maps.Point(0,0), // origin
+                anchor: new google.maps.Point(15, 40) // anchor
+            };
+
+            var marker = new google.maps.Marker({
+            position: mySecretLocation,
+            map: map,
+            title: 'Mylopotamos',
+            icon: icon
+            });
+
+            var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Mylopotamos Beach, Pelion</h1>'+
+            '<div id="bodyContent">'+
+            '<img src="img/mulopotamos.jpg" height="auto" width="100%">'
+            '</div>'+
+            '</div>';
+
+              var infowindow = new google.maps.InfoWindow({
+                 content: contentString
+              });
+              marker.addListener('click', function() {
+                  infowindow.open(map, marker);
+              });
+    }
+    //KTH Location
+    function kth(){
+      var kth = {lat: 59.34753, lng: 18.07385};
+      map.setCenter(kth);
+      map.setZoom(15);
+    }
 
 
 
@@ -265,8 +370,6 @@
     <script src="js/panControl.js"></script>
     <script src="js/zoomControl.js"></script>
     <script src="js/myLocation.js"></script>
-    <!-- <script src="js/fullScreen.js"></script> -->
-    
    
   </body>
 </html>

@@ -38,6 +38,7 @@ function MyLocation(myLocationDiv, map) {
            
             var myLocation1 = {lat: mylat, lng:  mylng};
             map.setCenter(myLocation1);
+            map.setZoom(15);
 
             var marker = new google.maps.Marker({
             position: myLocation1,
